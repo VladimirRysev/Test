@@ -1,0 +1,42 @@
+﻿@model Test.ViewModels.Home.IndexViewModel
+
+@Html.EditorFor(m => Model.SelectAll)
+@if (Model?.Rows?.Any() == true)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Скачать</th>
+                <th>Удалить</th>
+                <th>Изменить</th>
+                <th>Создать</th>
+                <th>Чтение</th>
+            </tr>
+            @for (int i = 0; i < Model.Rows.Count; i++)
+            {
+                <tr>
+                    <td></td>
+                    <td>@Html.EditorFor(m => Model.Rows[i].Douwnload, new { @class = "my-class", id = $"Rows[{i}].Download" })</td>
+                    <td>@Html.EditorFor(m => Model.Rows[i].Delete, new { @class = "my-class", id = $"Rows[{i}].Delete" })</td>
+                    <td>@Html.EditorFor(m => Model.Rows[i].Change, new { @class = "my-class", id = $"Rows[{i}].Change" })</td>
+                    <td>@Html.EditorFor(m => Model.Rows[i].Create, new { @class = "my-class", id = $"Rows[{i}].Create" })</td>
+                    <td>@Html.EditorFor(m => Model.Rows[i].Read, new { @class = "my-class", id = $"Rows[{i}].Read" })</td>
+                </tr>
+            }
+        </thead>
+    </table>
+}
+@section Scripts {
+
+    <script>
+        $('#cheknox_SelectAll').on('click', function () {
+            if ($(this).is(':checked')) {
+                $('.my-class').prop('checked', true);
+            } else {
+                $('.my-class').prop('checked', false);
+            }
+        });
+    </script>
+}
+

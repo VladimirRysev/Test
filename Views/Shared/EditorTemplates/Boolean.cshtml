@@ -1,0 +1,25 @@
+﻿@model bool
+@{
+    var htmlAttributes = new Dictionary<string, object>()
+    {
+        { "class", "custom-control-input"}
+    };
+
+    if (ViewData.ContainsKey("class"))
+    {
+        var s = htmlAttributes["class"] as string;
+        htmlAttributes["class"] = s + $" {ViewData["class"]}";
+    }
+    if (ViewData.ContainsKey("id"))
+    {
+        htmlAttributes.Add("id", ViewData["id"]);
+    } else
+    {
+        htmlAttributes.Add("id", $"cheknox_{ViewData.ModelMetadata.PropertyName}");
+    }
+    var atrfor = htmlAttributes["id"];
+}
+<div class="custom-control custom-checkbox">
+    @Html.CheckBoxFor(m => m, htmlAttributes)
+    <label class="custom-control-label" for="@atrfor">@ViewData.ModelMetadata.DisplayName</label>
+</div>
